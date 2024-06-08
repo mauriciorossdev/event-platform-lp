@@ -3,12 +3,15 @@ import './button.scss'
 interface ButtonProps {
     text: string,
     size: 'md' | 'lg',
-    onClick: () => void
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Button = ({ text = 'Button', size = 'md', onClick }: ButtonProps) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        onClick(e);
+    }
     return (
-        <button className={`button button${'-'+size}`}>{text}</button>
+        <button className={`button button${'-'+size}`} onClick={(e)=>handleClick(e)}>{text}</button>
     )
 }
 

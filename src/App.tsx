@@ -5,7 +5,8 @@ import Navbar from './components/navbar';
 import Button from './components/button';
 import FeatureItem from './components/featureItem';
 import Bubble from './components/bubble';
-
+import { useAppDispatch } from './redux/hooks';
+import { eventClicked, showEventClicked } from './redux/slices/event.slices';
 
 
 function App() {
@@ -84,6 +85,15 @@ function App() {
     },
 
   ]
+
+  const dispatch = useAppDispatch();
+
+  const handleClickButton = (source:string) => {
+    console.log('clicker from', source)
+    dispatch(eventClicked(`clicker from ${source}`))
+    dispatch(showEventClicked());
+  }
+  
   return (
     <div className="App">
       <div className="hero ">
@@ -97,7 +107,10 @@ function App() {
             <p className='text-body-lg'>
               Manage your event registrations hassle free and without any dependency with the technical team. Isn’t it sounds amazing?
             </p>
-            <Button text="Get Early Access" size="lg" onClick={() => console.log('click early access')} />
+            <Button 
+              text="Get Early Access" 
+              size="lg" 
+              onClick={() => handleClickButton('button hero')} />
           </div>
           <div className='hero__content-mockup relative'>
             <div className='absolute hero__circle-bg'></div>
@@ -145,7 +158,10 @@ function App() {
             <p className='text-body-lg color-white text-center'>Leveraging our virtual and live event experience, Hubilo offers everything you need to set up your next hybrid event from registration to executing a flawless event.</p>
 
           </div>
-          <Button text="Get Early Access" size="lg" onClick={() => console.log('click get started')} />
+          <Button 
+            text="Get Early Access" 
+            size="lg" 
+            onClick={() => handleClickButton('CTA') } />
         </div>
       </div>
       <footer className='footer bg-neutral-900'>
